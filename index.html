@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Deepavali ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'DM Sans', sans-serif;
+  color: #fff5e8;
+  background:
+    radial-gradient(circle at 15% 20%, #693329 0%, transparent 35%),
+    radial-gradient(circle at 85% 80%, #482044 0%, transparent 35%),
+    linear-gradient(135deg, #170e1c, #321522 55%, #160e1d);
+}
+
+.page {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  padding: 35px 7%;
+  align-items: center;
+  justify-content: center;
+  animation: appear .65s ease;
+}
+
+.page.active {
+  display: flex;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 55px;
+}
+
+.page:first-of-type .content,
+.page:last-of-type .content {
+  grid-template-columns: 1fr 1fr;
+}
+
+.story {
+  max-width: 480px;
+}
+
+.eyebrow {
+  color: #f4bd76;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.13;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+h1 span {
+  color: #ffc77f;
+}
+
+.message {
+  color: #e7d4cb;
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+
+.kannada {
+  font-size: 23px;
+  line-height: 1.7;
+  color: #ffd18c;
+  margin-bottom: 15px;
+}
+
+.art-frame {
+  width: 100%;
+  height: min(65vh, 510px);
+  padding: 10px;
+  border: 1px solid #e5b16c66;
+  border-radius: 24px;
+  background: #ffffff0b;
+  box-shadow: 0 20px 70px #0006;
+  position: relative;
+  overflow: hidden;
+}
+
+.art-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 17px;
+}
+
+.placeholder {
+  display: none;
+  height: 100%;
+  width: 100%;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #542d3d, #27172b);
+  color: #ffd18c;
+  text-align: center;
+  place-items: center;
+  padding: 25px;
+  line-height: 1.8;
+}
+
+.controls {
+  position: fixed;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  padding: 0 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: .25s;
+}
+
+.next, .back {
+  padding: 13px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.next {
+  color: #29151c;
+  background: #ffc77f;
+  box-shadow: 0 5px 25px #ffc77f33;
+}
+
+.back {
+  color: #f8d9bc;
+  background: #ffffff13;
+  border: 1px solid #ffffff30;
+}
+
+.next:hover, .back:hover {
+  transform: translateY(-3px);
+}
+
+.back:disabled {
+  opacity: .25;
+  cursor: default;
+  transform: none;
+}
+
+.progress {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  background: #ffffff40;
+  transition: .3s;
+}
+
+.dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background: #ffc77f;
+}
+
+.heart {
+  color: #ff9b9b;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+.corner {
+  position: fixed;
+  top: 22px;
+  right: 7%;
+  color: #e9b976;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+@media(max-width: 750px) {
+  .page {
+    padding: 65px 7% 100px;
+    align-items: center;
+  }
+
+  .content,
+  .page:first-of-type .content,
+  .page:last-of-type .content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .story {
+    margin: auto;
+  }
+
+  .art-frame {
+    height: 34vh;
+    max-height: 300px;
+    order: -1;
+  }
+
+  h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .message {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .kannada {
+    font-size: 19px;
+  }
+
+  .eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .controls {
+    bottom: 15px;
+    padding: 0 5%;
+  }
+
+  .next, .back {
+    padding: 11px 16px;
+  }
+
+  .progress {
+    gap: 4px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="corner">OUR LITTLE STORY ♡</div>
+
+<main id="story">
+
+  <section class="page active">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">A little surprise for you appaa ❤️</div>
+        <h1>ನನ್ನ ಪ್ರೀತಿಯ ಹುಡುಗನಿಗೆ <span>❤️</span></h1>
+        <p class="kannada">ದೀಪಾವಳಿ ಹಬ್ಬದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು ಯಜಮಾನ 🪔❤️!</p>
+        <p class="message">
+          This Deepavali, I didn't want to give you just a wish.
+          I wanted to create a little world with our memories,
+          our smiles and a little more and more of love ♥.
+        </p>
+        <p class="heart">Made with love, just for you ♥</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/1.jpeg" alt="Our cartoon couple"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">🪔<br>Add your first couple cartoon image<br><small>images/scene-1.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 01 · The celebration</div>
+        <h1>Our little <span>spark</span> ✨</h1>
+        <p class="message">
+          First things first… let's light up the night!
+          A little sursurbatti, a lot of laughter,
+          and my favourite person beside me.
+        </p>
+        <p class="kannada">ನಿನ್ನ ಜೊತೆ ಪ್ರತಿಯೊಂದು ಕ್ಷಣವೂ ವಿಶೇಷ ❤️</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/2.jpeg" alt="Couple lighting sparklers"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">✨<br>Add sparklers scene<br><small>images/scene-2.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 02 · A surprise</div>
+        <h1>Guess who's <span>here?</span> 💗</h1>
+        <p class="message">
+          And then… your favourite girl makes a surprise entry!
+          Because every celebration is better when we're together.
+        </p>
+        <p class="kannada">ಸರ್ಪ್ರೈಸ್ ಕಣೋ! 🥰</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/3.jpeg" alt="Surprise entrance"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">💗<br>Add surprise entrance scene<br><small>images/scene-3.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 03 · Little lights ❤️</div>
+        <h1>One diya, <span>two hearts</span> 🪔</h1>
+        <p class="message">
+          Lighting diyas together, making wishes together…
+          I hope our lives always stay this bright.
+        </p>
+        <p class="kannada">ನಮ್ಮ ಜೀವನ ಹೀಗೆ ಸದಾ ಬೆಳಗುತ್ತಿರಲಿ ❤️</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/4.jpeg" alt="Lighting diyas"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">🪔<br>Add diya lighting scene<br><small>images/scene-4.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 04 · Uh oh!</div>
+        <h1>Mr. <span>Brave boy</span> 😂</h1>
+        <p class="message">
+          And here comes the big firecracker!
+          Someone is acting like the bravest person in the world ❤️.
+        </p>
+        <p class="kannada">ಜಾಗ್ರತೆ ಅಪ್ಪ! 😂❤️</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/5.jpeg" alt="Firecracker scene"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">🎆<br>Add firecracker scene<br><small>images/scene-5.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 05 · The reaction</div>
+        <h1>Wait… <span>WHAT?!</span> 😭</h1>
+        <p class="message">
+          BOOM! And there goes my courage.
+          I was ready for Deepavali… just not THAT sound!
+        </p>
+        <p class="kannada">ಅಯ್ಯೋ ಅಮ್ಮಾ! 😭</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/6.jpeg" alt="Funny scared reaction"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">😳<br>Add scared reaction scene<br><small>images/scene-6.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 06 · My safe place</div>
+        <h1>Come here, <span>little one</span> 🤗</h1>
+        <p class="message">
+          And you come running to hug me.
+          Maybe that's my favourite part…
+          knowing I have someone to hold me close.
+        </p>
+        <p class="kannada">ನಿನ್ನ ಅಪ್ಪುಗೆಯೇ ನನ್ನ ನೆಮ್ಮದಿ ಅಪ್ಪ❤️</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/7.jpeg" alt="Comforting hug"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">🤗<br>Add hugging scene<br><small>images/scene-7.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">Chapter 07 · Together</div>
+        <h1>My favourite <span>festival</span> ✨</h1>
+        <p class="message">
+          The lights, the laughter, the little moments…
+          Everything feels more beautiful when I celebrate with you.
+        </p>
+        <p class="kannada">ನೀನು ಜೊತೆಯಿದ್ದರೆ ಸಾಕು ರೀ! 💕</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/8.jpeg" alt="Celebrating together"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">✨<br>Add celebration scene<br><small>images/scene-8.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="content">
+      <div class="story">
+        <div class="eyebrow">A little note, from me to you ❤️</div>
+        <h1>My favourite <span>person</span> ❤️</h1>
+        <p class="message">
+          No matter how many festivals come and go,
+          I hope we keep creating beautiful little memories.
+          Thank you for being you 💕✨.
+        </p>
+        <p class="kannada">ನನ್ನ ಜೊತೆ ಹೀಗೆ ಸದಾ ಇರು ❤️</p>
+        <p class="heart">Happy Deepavali, my love! 🪔</p>
+      </div>
+      <div class="art-frame">
+        <img src="images/9.jpeg" alt="Our romantic ending"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="placeholder">❤️<br>Add your final couple image<br><small>images/scene-9.jpg</small></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="controls">
+  <button class="back" id="back" onclick="changePage(-1)">← Back</button>
+  <div class="progress" id="progress"></div>
+  <button class="next" id="next" onclick="changePage(1)">Next →</button>
+</div>
+
+<script>
+const pages = document.querySelectorAll('.page');
+const progress = document.getElementById('progress');
+const back = document.getElementById('back');
+const next = document.getElementById('next');
+
+let current = 0;
+
+pages.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  progress.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.dot');
+
+function showPage(index) {
+  if (index < 0 || index >= pages.length) return;
+
+  pages[current].classList.remove('active');
+  current = index;
+  pages[current].classList.add('active');
+
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === current);
+  });
+
+  back.disabled = current === 0;
+  next.textContent = current === pages.length - 1
+    ? 'Replay our story ↻'
+    : 'Next →';
+
+  history.replaceState(null, '', '#page-' + (current + 1));
+}
+
+function changePage(direction) {
+  if (current === pages.length - 1 && direction === 1) {
+    showPage(0);
+    return;
+  }
+  showPage(current + direction);
+}
+
+back.disabled = true;
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowRight') changePage(1);
+  if (event.key === 'ArrowLeft') changePage(-1);
+});
+</script>
+
+</body>
+</html>
